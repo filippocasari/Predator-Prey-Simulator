@@ -4,8 +4,8 @@ from Wolf import Wolf
 from Rabbit import Rabbit
 import random
 import math
-import matplotlib.ticker as ticker
 import time
+import json
 L = int(input("Insert value for L: "))
 name_plot=input("Insert name for plot according with the assignment point: ")
 PERC_WOLVES = 0.01
@@ -13,20 +13,27 @@ PERC_RABBITS = 0.09
 L2 = L**2
 #N_R = int(L2*PERC_RABBITS)
 #N_W = int(L2*PERC_WOLVES)
-N_R = 90
-N_W=20
+
 list_wolves = {}
 list_rabbits = {}
-R_C = 0.1
+with open('params.json', 'r') as f:
+    # Load the contents of the file into a dictionary
+    params = json.load(f)
+
+N_R = params['N_R']
+N_W = params['N_W']
+R_C = params['R_C']
+P_E_W = params['P_E_W']
+P_R_W = params['P_R_W']
+P_R_R = params['P_R_R']
+T_D_R = params['T_D_R']
+T_D_W = params['T_D_W']
+mu = params['mu']
+sigma = params['sigma']
+move_when_eat = params['move_when_eat']
+del params
 print(f"Number of wolves: {N_W}\n")
 print(f"Number of rabbits: {N_R}\n")
-P_E_W = 0.1
-P_R_W = 0.3
-P_R_R = 0.18
-T_D_R = 100
-T_D_W = 100
-mu = 0.0
-sigma = 0.5
 N_X = int(L/R_C)
 N_Y = int(L/R_C)
 fig, ax = plt.subplots()
@@ -66,9 +73,13 @@ for iter in range(1000):
 
         else:
             wolf.not_eaten_iter += 1
-        step_len = np.random.normal(mu, sigma)
-        dx = np.random.randint(-1, 2)*step_len/np.sqrt(2)
-        dy = np.random.randint(-1, 2)*step_len/np.sqrt(2)
+        step_len = np.random.normal(mu, sigma, 2)
+        direction = np.random.randn(2)
+        direction/= np.linalg.norm(direction)
+        step_len=step_len*direction
+        
+        dx = step_len[0]
+        dy = step_len[1]
         wolf.move(dx, dy, L)
 
     # new_value = [[list_wolves[i].x, list_wolves[i].y] for i in range(N_W)]
@@ -135,17 +146,14 @@ for iter in range(1000):
                         if (random.random() < P_E_W):
                             list_rabbits = {k: v for k, v in list_rabbits.items() if v != rabbit}
                             N_R = N_R - 1
-                            wolf.x, wolf.y = rabbit.x, rabbit.y
-                            wolf.i, wolf.j = rabbit.i, rabbit.j
+                            if (move_when_eat):
+                                wolf.x, wolf.y = rabbit.x, rabbit.y
+                                wolf.i, wolf.j = rabbit.i, rabbit.j
                             wolf.eat()
                             already_eaten = True
                             
                             if (random.random() < P_R_W):
-                                new_wolf = Wolf(0, 0, 0, 0, R_C)
-                                new_wolf.x = wolf.x
-                                new_wolf.y = wolf.y
-                                new_wolf.i = wolf.i
-                                new_wolf.j = wolf.j
+                                new_wolf = Wolf(wolf.x, wolf.y, wolf.i,  wolf.j, R_C)
 
                                 added_wolves[N_W]=new_wolf
                                 N_W = N_W + 1
@@ -187,6 +195,8 @@ plt.legend()
 ax2.set_title("Number of wolves and rabbits over time")
 ax2.set_xlabel("Iterations")
 ax2.grid(True)
-fig2.savefig("output/"+name_plot+".png")
+if(name_plot != None):
+    fig2.savefig("output/"+name_plot+".png")
+
 plt.show()
 

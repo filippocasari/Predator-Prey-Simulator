@@ -395,6 +395,7 @@ INPUT /usr/local/texlive/2022/texmf-dist/tex/latex/varwidth/varwidth.sty
 INPUT /usr/local/texlive/2022/texmf-dist/tex/latex/varwidth/varwidth.sty
 INPUT /usr/local/texlive/2022/texmf-dist/tex/latex/varwidth/varwidth.sty
 INPUT /usr/local/texlive/2022/texmf-dist/tex/latex/varwidth/varwidth.sty
+INPUT /usr/local/texlive/2022/texmf-dist/tex/latex/listings/listings.sty
 INPUT ./assignment.sty
 INPUT assignment.sty
 INPUT ./assignment.sty
