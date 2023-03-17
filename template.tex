@@ -1,0 +1,346 @@
+\documentclass[unicode,11pt,a4paper,oneside,numbers=endperiod,openany]{scrartcl}
+\newcommand\tab[1][0.5cm]{\hspace*{#1}}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{seqsplit}
+\usepackage{float}
+\usepackage{booktabs}
+%New colors defined below
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.98,0.98,0.98}
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour}, commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2,
+  numbers=none
+}
+\lstdefinestyle{base}{
+  language=C,
+  emptylines=1,
+  breaklines=true,
+  basicstyle=\ttfamily\color{black},
+  moredelim=**[is][\color{red}]{@}{@},
+}
+\lstset{style=mystyle}
+\newcommand\MyBox[2]{
+  \fbox{\lower0.75cm
+    \vbox to 1.7cm{\vfil
+      \hbox to 1.7cm{\hfil\parbox{1.4cm}{#1\\#2}\hfil}
+      \vfil}%
+  }%
+}
+\input{assignment.sty}
+
+\usepackage{subcaption}
+
+\begin{document}
+
+
+\setassignment
+
+\serieheader{Software Design and Modeling}{2023}{Students: Timur Taepov, Filippo Casari}{}{Report for Assignment 3}{}
+\newline
+
+
+\section{Introduction}
+In this project, we will apply various refactoring techniques. Refactoring, or in other words code rewriting, is required for any developing project. Its purpose is to fix and improve problematic code sections. As a rule, these are internal changes which do not affect the external product display, do not add functionality and do not change the loading speed. We used two different refactoring tools which helped us to do this:
+\begin{itemize}
+    \item SonarQube
+    \item Sourcery
+\end{itemize}
+SonarQube measures software code quality according to seven indicators (and corresponding metrics) of software quality, which developers call the $Seven$ $Axes$ $of$ $Quality$:
+\begin{itemize}
+    \item Potential bugs
+    \item Programming style
+    \item Tests
+    \item Code section repetition
+    \item Comments
+    \item Architecture and design
+    \item Complexity
+\end{itemize}
+Sourcery is a plugin for all types of popular IDE's which reviews your code everywhere you work and automatically suggests improvements.
+
+\section{Project selection process}
+
+%a brief discussion of what project you chose and why you chose it%
+We spent most of our time looking for the right project. A lot of the projects were simply difficult to compile or the structure of the projects was very complex and further refactoring steps could have taken a very long time. We were also looking for projects in two languages: Python and Java. For us it was not so important how many lines of code there were in the project, but more important was the coherence and structure of the project, so that refactoring would be an obvious step to contribute to the project.
+\begin{itemize}
+    \item \href{https://github.com/netmanchris/PYHPEIMC}{HPE IMC Python REST Client}
+    \item \href{https://github.com/DinoTheDinosaur/speech_analytics}{speech\textunderscore analytics}
+    \item \href{https://github.com/mrmans0n/smart-location-lib}{Smart Location Library}
+\end{itemize}
+As a result, we came across the project \href{https://github.com/tehmaze/ipcalc}{"ipcalc"} which is an IP subnet calculator. Project description:"This module allows you to perform IP subnet calculations, there is support for both IPv4 and IPv6 CIDR notation.". 
+\newline
+\section{Project statistics}
+\begin{itemize}
+    \item Stars: 166
+    \item Forks: 19
+    \item Issues: 7
+    \item Lines of code: $\sim1000$
+\end{itemize}
+The IP Subnet Mask Calculator enables subnet network calculations using network class, IP address, subnet mask, subnet bits, mask bits, maximum required IP subnets and maximum required hosts per subnet.
+
+\subsection{Statistics using cloc}
+In order to analyse the project, we run cloc tool as shown below (Tab. \ref{tab:statscloc}). 
+
+\begin{table}[H]
+\begin{tabular}{@{}|l|l|l|l|l|@{}}
+\toprule
+\textbf{Files} & \textbf{Language} & \textbf{Blank} & \textbf{Comment} & \textbf{Code} \\ \midrule
+4              & \textit{Python}   & 217            & 425              & 674           \\ \midrule
+2              & \textit{make}     & 19             & 4                & 78            \\ \midrule
+2              & \textit{Markdown} & 11             & 0                & 47            \\ \midrule
+3              & \textit{Text}     & 13             & 0                & 46            \\ \midrule
+2              & \textit{YAML}     & 1              & 2                & 26            \\ \bottomrule
+\end{tabular}
+\centering
+
+\caption{Statistics with cloc tool}
+\label{tab:statscloc}
+\end{table}
+
+
+\section{The goals of refactoring}
+For better performance we decided to split our job and work with two different tools as we mentioned earlier. The main goals will be described further for exact tools that we used.
+%the goals of your refactoring: what aspects of design you want to improve, and why they need improving%
+\subsection{The goals of refactoring with Sourcery}
+Using this amazing plugin our goal was to find small/medium size changes which can make code more comfortable. For example:"replacing if statement with if expression", or "remove unnecessary rule". Also we performed "Swap if/else branches", "Merge duplicate blocks" etc.
+\subsection{The goals of refactoring with SonarLint}
+%rule : cognitive complexity
+%TO-DO...
+\subsubsection{SonarQube for detection}
+The reason why we have chosen Sonarqube is that it provides many rules and many useful strategies to find code smells throughout the code. One of the rules is Cognitive Complexity. By quoting the tool's documentation: \textit{"Cognitive Complexity is a measure of how hard the control flow of a function is to understand. Functions with high Cognitive Complexity will be difficult to maintain."}. Indeed, Refactoring is a way to reduce this measure.
+\subsubsection{SonarQube statistics}
+% reporting SonarQube results
+To get more information about the project \textbf{ipCalculator}, we run the suggested tool from the previous assignment \textit{SonarQube}. We report below the statistics we obtained (Fig. \ref{fig:stats}). 
+
+\begin{figure}[H]
+\includegraphics[scale=0.39]{SD&M/images/statsSonarqube.png}
+\centering
+\caption{Statistics by SonarQube}
+\label{fig:stats}
+\end{figure}
+Most of the refactoring are in the section "code smells". Nine of them have been found, divided in 4 types:
+\begin{itemize}
+\item 4 critical
+\item 4 major
+\item 1 minor
+\item 0 blocker
+
+\end{itemize}
+%It turns out that this SonarQube rule can help us to accomplish our goal. Several examples will be explained later. %
+\subsection{Refactoring with SonarLint}
+SonarLint is a tool which helps us to refactor the python code. It can detect portions of the code that must be refactored. By combining SonarQube and SonarLint we can refactor easily the code. We refactored both \textit{ipcalc.py} and \textit{test.py}. 
+
+
+\section{Example of refactoring}
+
+\subsection{Examples of refactoring with Sourcery}
+\subsubsection{Replace if statement with if expression}
+Replace if statement with if expression, Hoist repeated code outside conditional statement (refactoring)
+\newline
+Function $IP.\textunderscore \textunderscore init \textunderscore$refactored with the following changes:
+\begin{itemize}
+    \item Replace if statement with if expression (assign-if -exp)
+    \item Hoist repeated code outside conditional statement (hoist-statement-from-if)
+\end{itemize}
+\textbf{Before refactoring:}
+\begin{lstlisting}[language=Python]
+# Before refactoring
+        if self.ip <= MAX_ IPV4:
+            self.v = version or 4
+            self.dg = self._itodq(ip)
+else:
+            self.v = version or 6
+            self.dq = self._itodq(ip)@
+# After refactoring
+    self.v = version or 4 if self.ip <= MAX_IPV4 else version or 6
+    self.dg = self. _itoda (ip)
+\end{lstlisting}
+\subsubsection{Restructure and simplify code}
+Function IP. \textunderscore dqtoi\textunderscore ipv6 refactored with the following changes:
+\begin{itemize}
+    \item Use f-string instead of string concatenation (use-fstring-for-concatenation)
+\end{itemize}
+\begin{lstlisting}[language=Python]
+# Before refactoring
+ipv6part = dq[: col_ind] + ":0:0"
+# After refactoring
+ipv6part = f'{dq[:col_ind]}:0:0"
+\end{lstlisting}
+\begin{itemize}
+    \item Simplify logical expression using De Morgan identities (de-morgan)
+\end{itemize}
+\begin{lstlisting}[language=Python]
+# Before refactoring
+raise ValueError ('%: IPv6 address invalid:
+'compressed format malformed' % dq)
+elif not (dq.startswith('::') or dq.endswith('::')) and Len([x for x in hx if x == "']) > 1:
+raise ValueError ('%: IPv6 address invalid:' 'compressed format malformed' % da)
+
+# After refactoring
+    raise ValueError (f' {dg}: IPv6 address invalid: compressed format malformed')
+elif not dq. startswith('::') and not dq.endswith'::') and len([x for x in hx if x == 1']) > 1:
+    raise ValueError (f'{dq}: IPv6 address invalid: compressed format malformed'")
+\end{lstlisting}
+\begin{itemize}
+    \item Replace interpolated string formatting with f-string [×4] (replace-interpolation-with-fstring)
+\end{itemize}
+\begin{lstlisting}[language=Python]
+# Before refactoring
+raise ValueError ('%: IPv6 address with more than 8 hexlets' % dq)
+# After refactoring
+raise ValueError (f' {da}: IPv6 address with more than 8 hexlets')
+\end{lstlisting}
+\subsection{Examples of refactoring with SonarLint}
+\subsubsection{Unused argument}
+%TO-DO...
+As one can see, the following function takes as argument "other" (List. \ref{list:notusedarg}), but it is not used by the function itself. What we did was just removing this unused argument. This was a problematic bug detected by SonarQube. 
+\begin{lstlisting}[language=Python,label=list:notusedarg, caption=Unused argument  ]
+def __hash__(self, other):
+        """Hash the current network."""
+        return hash(int(self))
+        
+\end{lstlisting}
+
+\subsubsection{Duplicated literal strings (minor Refactoring)}
+Duplicated string literals make the process of refactoring error-prone, since you must be sure to update all occurrences. Here we have an example List.  \ref{list:duplicated_strings} in which a string is repeated six times.
+\begin{lstlisting}[language=Python, caption=Repeated strings before refactoring, label=list:duplicated_strings]
+net = Network('2001:dead:beef:1:c01d:c01a::', 48)
+...
+self.assertTrue(str(net.to_compressed())\
+=='2001:dead:beef:1:c01d:c01a::')
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Repeated strings after refactoring, label=list:duplicated\_strings\_ref]
+# we define a variable called \textit{ipString} thta we assign  #several times
+class TestSuite(unittest.TestCase):
+    
+    ipString = '2001:dead:beef:1:c01d:c01a::'
+        
+\end{lstlisting}
+
+
+
+
+\subsubsection{Decreasing the Cognitive Complexity}
+One of the main refactoring in the \textbf{ipcalc.py} file was modularizing the constructor of the class \textit{IP}. The cognitive complexity of the \textit{init} method was 31 (List. \ref{list:CC31}). However, around 15 should be the estimated upper limit for cognitive complexity in Python.
+The complexity and readability of the code are both increased by the use of numerous if/else statements and loops.
+
+\begin{lstlisting}[language=Python, caption=Cognitive Complexity 31, label=list:CC31]
+def __init__(self, ip, mask=None, version=0):
+        ...
+        if ip is None:
+           ...
+        elif isinstance(ip, IP):
+            ...
+        elif isinstance(ip, six.integer_types):
+            if self.ip <= MAX_IPV4:
+                ...
+            else:
+                ...
+        else:
+            # network identifier
+            if '%' in ip:
+                ...
+            if '/' in ip:
+                ...
+        if self.mask is None:
+           ...
+        elif isinstance(self.mask, six.integer_types) or 
+        ...
+        elif isinstance(self.mask, six.string_types):
+            ...
+            if inverted == -1:
+                ...
+            else:
+                while inverted & pow(2, count):
+                    ...
+        else:
+            ...
+        
+        if self.v == 6:
+            self.dq = self._itodq(self.ip)
+            if not 0 <= self.mask <= 128:
+                ...
+        elif self.v == 4:
+            if not 0 <= self.mask <= 32:
+                ...
+
+\end{lstlisting}
+To make the large function easier for other developers to grasp, we divided it up into sub-methods as we show in List. \ref{list:CC15}. \\
+As one can see, the newly discovered level of cognitive complexity is below 15 for each function.
+
+        
+\begin{lstlisting}[language=Python, caption=Cognitive Complexity after Refactoring, label=list:CC15]
+
+    def check_ip(self, ip, version):
+        
+        ...
+    def check_mask(self):
+        ...
+    def __init__(self, ip, mask=None, version=0):
+        self.mask = mask
+        self.v = 0
+        self.check_ip(ip, version)
+        self.check_mask()
+\end{lstlisting}
+
+\section{A presentation of work}
+
+%a presentation of what you did to ensure that your refactoring did not change program behavior (such as running tests, code inspection, . . . )%
+\subsection{Sourcery results}
+Using Sourcery plugin, we performed 17 significant refactoring changes such as:
+\begin{itemize}
+    \item Use f-string instead of string concatenation (use-fstring-for-concatenation)
+    \item Replace interpolated string formatting with f-string [×4] (replace-interpolation-with-fstring)
+    \item Simplify logical expression using De Morgan identities (de-morgan)
+    \item Replace unused for index with underscore (for -index-underscore)
+    \item Move assignment closer to its usage within a block (move-assign-in-block)
+    \item Replace if statement with if expression (assign-if -exp)
+    \item Hoist repeated code outside conditional statement (hoist-statement-from-if)
+    \item Replace boolean ternary with inline if expression (ternary-to-if -expression)
+    \item Merge duplicate blocks in conditional (merge-duplicate-blocks)
+    \item Remove redundant conditional (remove -redundant -if)
+    \item Replace multiple comparisons of same variable with in operator (merge-comparisons)
+    \item Use set when checking membership of a collection of literals (collection-into-set)
+    \item Lift code into else after jump in control flow (reintroduce-else)
+    \item Swap if/else branches of if expression to remove negation (swap-if -expression)
+    \item Add guard clause (last-if-guard)
+    \item Use contextlib's suppress method to silence an error (Use -contextlib-suppress)
+    \item Extract code out into method (extract-method)
+\end{itemize}
+
+
+
+
+\section{Discussion}
+Refactoring a project using Sourcery is a pleasure, same with SonarQube/SonarLint. All structures are refactored with ease. Thus, tests are evaluated not only in terms of execution success, but also in terms of test coverage of the source code, which is a pleasure. And the quality measurement according to the concept of technical debt in SonarQube, implemented as a plug-in, leaves no chance for competitors. Just like Sourcery, which is embedded in the IDE and allows refactoring concisely, without "destroying" the code. Therefore, we conclude that the approaches and types of refactoring offered by these tools will work for any other code, without changing the operation. Consequently, we can apply it everywhere. After code inspection and running 14 unit tests (unit test file is included in project "test.py") we can conclude that behaviour did not changed and the program works perfect. 
+\newline
+One more thing that needs to be clarified, that we've additionally created the file $example.py$, to check whether the program returns the right output.
+
+\section{Conclusion}
+
+%an assessment of what else could be improved in the project’s design (if anything)%
+We think that during the process of refactoring there could be some improvements on splitting two classes from $ipcalc.py$ file. But in general we've done most of the refactoring approaches which are possible to implement there. That's why we can conclude that in general all of the possible refactoring techniques were applied.
+
+\end{document}
