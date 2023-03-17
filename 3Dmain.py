@@ -32,6 +32,7 @@ T_D_W = params['T_D_W']
 mu = params['mu']
 sigma = params['sigma']
 move_when_eat = params['move_when_eat']
+print("MOVE THE WOLF IF IT EATS: ", move_when_eat)
 del params
 print(f"Number of wolves: {N_W}\n")
 print(f"Number of rabbits: {N_R}\n")
