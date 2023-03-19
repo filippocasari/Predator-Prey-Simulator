@@ -13,20 +13,20 @@ PERC_RABBITS = 0.09
 L2 = L**2
 #N_R = int(L2*PERC_RABBITS)
 #N_W = int(L2*PERC_WOLVES)
-N_R = 900
-N_W=200
+N_R = 900#900
+N_W= 200#100
 list_wolves = []
 list_rabbits = []
 R_C = 0.5
 print(f"Number of wolves: {N_W}\n")
 print(f"Number of rabbits: {N_R}\n")
-P_E_W = 0.03
-P_R_W = 0.1
-P_R_R = 0.07
-T_D_R = 100
+P_E_W = 0.03#0.02#
+P_R_W = 0.1#0.02#
+P_R_R = 0.07#0.02#
+T_D_R = 100#100
 T_D_W = 50
-mu = 0.0
-sigma = 0.05
+mu = 0.0#0.0
+sigma = 0.05#0.05
 N_X = int(L/R_C)
 N_Y = int(L/R_C)
 fig, ax = plt.subplots()
@@ -52,30 +52,23 @@ for i in range(N_R):
     list_rabbits.append(Rabbit(x, y, x_cell, y_cell, T_D_R, R_C))
 
 
-for iter in range(1000):
+for iter in range(1500):
 
     if (N_W < 1 or N_R < 1):
         break
 
     # past_value = [[list_wolves[i].x, list_wolves[i].y] for i in range(N_W)]
-
-    for wolf in list_wolves:
+    index =-1
+    for wolf in list_wolves.copy():
+        index+=1
         if (wolf.not_eaten_iter >= T_D_W):
             list_wolves.remove(wolf)
             N_W = N_W - 1
+            index-=1
+            continue
 
         else:
-            wolf.not_eaten_iter += 1
-        step_len = np.random.normal(mu, sigma)
-        dx = np.random.randint(-1, 2)*step_len/np.sqrt(2)
-        dy = np.random.randint(-1, 2)*step_len/np.sqrt(2)
-        wolf.move(dx, dy, L)
-
-    # new_value = [[list_wolves[i].x, list_wolves[i].y] for i in range(N_W)]
-    # print(f"past values: {past_value}")
-    # print(f"new value {new_value}")
-    add_rabbits = []
-    for rabbit in list_rabbits:
+            list_wolves[index].not_eaten_iter += 1
         step_len = np.random.normal(mu, sigma, 2)
         direction = np.random.randn(2)
         direction/= np.linalg.norm(direction)
@@ -83,14 +76,33 @@ for iter in range(1000):
         
         dx = step_len[0]
         dy = step_len[1]
-        rabbit.move(dx, dy, L)
+        list_wolves[index].move(dx, dy, L)
+        
+
+    # new_value = [[list_wolves[i].x, list_wolves[i].y] for i in range(N_W)]
+    # print(f"past values: {past_value}")
+    # print(f"new value {new_value}")
+    add_rabbits = []
+    index =-1
+    for rabbit in list_rabbits.copy():
+        index+=1
+        step_len = np.random.normal(mu, sigma, 2)
+        direction = np.random.randn(2)
+        direction/= np.linalg.norm(direction)
+        step_len=step_len*direction
+        
+        dx = step_len[0]
+        dy = step_len[1]
+        list_rabbits[index].move(dx, dy, L)
+        
 
         if (rabbit.life_steps >= T_D_R):
             list_rabbits.remove(rabbit)
             N_R = N_R - 1
+            index-=1
 
         else:
-            if (random.random() < P_R_R):
+            if (random.random() <= P_R_R):
                 new_rabbit = Rabbit(rabbit.x, rabbit.y,
                                     rabbit.i, rabbit.j, T_D_R, R_C)
                 add_rabbits.append(new_rabbit)
@@ -102,17 +114,15 @@ for iter in range(1000):
     # list_wolves=np.array(list_wolves)
     to_remove = []
     for wolf in list_wolves:
-        already_eaten = False
+        #already_eaten = False
         i = wolf.i
         j = wolf.j
         x, y = wolf.x, wolf.y
 
         for ii in range(i-1, i+1):
-            if (already_eaten):
-                break
+            
             for jj in range(j-1, j+1):
-                if (already_eaten):
-                    break
+                
                 nearby_rabbits = [r for r in list_rabbits if r.i == ii %
                                   N_X and r.j == jj % N_Y and r not in to_remove]
                 # print(f"Nearby rabbits: {nearby_rabbits}")
@@ -131,14 +141,14 @@ for iter in range(1000):
                     d = math.sqrt(d_x**2 + d_y**2)
                     if (d <= R_C):
                         # print("Wolf found rabbit")
-                        if (random.random() < P_E_W):
+                        if (random.random() <= P_E_W):
                             to_remove.append(rabbit)
                             wolf.x, wolf.y = rabbit.x, rabbit.y
                             wolf.i, wolf.j = rabbit.i, rabbit.j
                             wolf.eat()
-                            already_eaten = True
+                            #already_eaten = True
                             N_R = N_R - 1
-                            if (random.random() < P_R_W):
+                            if (random.random() <= P_R_W):
                                 new_wolf = Wolf(0, 0, 0, 0, R_C)
                                 new_wolf.x = wolf.x
                                 new_wolf.y = wolf.y
@@ -148,7 +158,7 @@ for iter in range(1000):
                                 added_wolves.append(new_wolf)
                                 N_W = N_W + 1
                             # print(f"Rabbit eaten by wolf at {rabbit.x}, {rabbit.y}")
-                            break
+                            #break
 
     list_wolves.extend(added_wolves)
     # list_num_wolves.append(N_W)
@@ -186,6 +196,32 @@ plt.legend()
 ax2.set_title("Number of wolves and rabbits over time")
 ax2.set_xlabel("Iterations")
 ax2.grid(True)
-fig2.savefig(name_plot+".png")
+if(name_plot!=None):
+    fig2.savefig("output_main/"+name_plot+".png")
+
 plt.show()
 
+from matplotlib.animation import FuncAnimation
+fig3=plt.figure()
+
+#scatter = ax.scatter([], [])
+def animate(n):
+    line, = plt.plot(list_num_rabbits[:n], list_num_wolves[:n], color='g')
+    plt.xlim([0, max(list_num_rabbits)])
+    plt.ylim([0, max(list_num_wolves)])
+    return line,
+
+
+plt.scatter(list_num_rabbits[0], list_num_wolves[0], c='r', label="Starting point")
+plt.scatter(list_num_rabbits[-1], list_num_wolves[-1], c='b', label="End point")
+plt.legend()
+plt.title("Number of wolves vs number of rabbits")
+plt.ylabel("number of rabbits")
+plt.xlabel("Number of wolves")
+plt.grid(True)
+#ax3.plot(,, c='r')
+anim = FuncAnimation(fig, animate, frames=len(list_num_rabbits), interval=25, blit=True)
+
+if (name_plot!=None):
+    fig3.savefig(f"output_main/{name_plot}_populations.png")
+plt.show()

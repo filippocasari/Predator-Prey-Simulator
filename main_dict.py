@@ -42,7 +42,7 @@ scatter_rabbits = ax.scatter([], [], c='b')
 ax.set_xlim([0, L])
 ax.set_ylim([0, L])
 start = time.time()
-
+fig.savefig("initial_condition_"+name_plot + ".png")
 list_num_wolves = []
 list_num_rabbits = []
 for i in range(N_W):
@@ -70,9 +70,10 @@ for iter in range(1000):
         if (wolf.not_eaten_iter >= T_D_W):
             del list_wolves[key]
             N_W = N_W - 1
+            continue
 
         else:
-            wolf.not_eaten_iter += 1
+            list_wolves[key].not_eaten_iter += 1
         step_len = np.random.normal(mu, sigma, 2)
         direction = np.random.randn(2)
         direction/= np.linalg.norm(direction)
@@ -80,7 +81,7 @@ for iter in range(1000):
         
         dx = step_len[0]
         dy = step_len[1]
-        wolf.move(dx, dy, L)
+        list_wolves[key].move(dx, dy, L)
 
     # new_value = [[list_wolves[i].x, list_wolves[i].y] for i in range(N_W)]
     # print(f"past values: {past_value}")
@@ -94,42 +95,41 @@ for iter in range(1000):
         
         dx = step_len[0]
         dy = step_len[1]
-        rabbit.move(dx, dy, L)
+        list_rabbits[key].move(dx, dy, L)
 
         if (rabbit.life_steps >= T_D_R):
             del list_rabbits[key]
-            N_R = N_R - 1
+            
 
         else:
             if (random.random() < P_R_R):
                 new_rabbit = Rabbit(rabbit.x, rabbit.y,
                                     rabbit.i, rabbit.j, T_D_R, R_C)
-                add_rabbits[N_R]=new_rabbit
-                N_R = N_R + 1
+                add_rabbits[max(list_rabbits.keys()) + 1] = new_rabbit
+                
 
     list_rabbits.update(add_rabbits)
+    N_R = len(list_rabbits)
     # list_num_rabbits.append(N_R)
-    added_wolves = {}
+    added_wolves = []
     # list_wolves=np.array(list_wolves)
-    to_remove = {}
-    for k_w, wolf in list(list_wolves.items()):
-        already_eaten = False
+    to_remove = []
+    for wolf_id, wolf in list(list_wolves.items()):
+        #already_eaten = False
         i = wolf.i
         j = wolf.j
         x, y = wolf.x, wolf.y
 
         for ii in range(i-1, i+1):
-            if (already_eaten):
-                break
+            
             for jj in range(j-1, j+1):
-                if (already_eaten):
-                    break
-                nearby_rabbits = {r.i: r for r in list_rabbits.values() if r.i == ii % N_X and r.j == jj % N_Y and r not in to_remove.values()}
-
+                
+                nearby_rabbits = {rabbit_id: rabbit for rabbit_id, rabbit in list_rabbits.items() if rabbit.i == ii %
+                                    N_X and rabbit.j == jj % N_Y and rabbit_id not in to_remove}
 
                 # print(f"Nearby rabbits: {nearby_rabbits}")
                 
-                for k_r, rabbit in list(nearby_rabbits.items()):
+                for rabbit_id, rabbit in nearby_rabbits.items():
                     d_x = x-rabbit.x
                     if (d_x > L/2):
                         d_x = d_x-L
@@ -144,23 +144,28 @@ for iter in range(1000):
                     if (d <= R_C):
                         # print("Wolf found rabbit")
                         if (random.random() < P_E_W):
-                            list_rabbits = {k: v for k, v in list_rabbits.items() if v != rabbit}
+                            to_remove.append(rabbit_id)
+                            #wolf.x, wolf.y = rabbit.x, rabbit.y
+                            #wolf.i, wolf.j = rabbit.i, rabbit.j
+                            list_wolves[wolf_id].eat()
+                            #already_eaten = True
                             N_R = N_R - 1
-                            if (move_when_eat):
-                                wolf.x, wolf.y = rabbit.x, rabbit.y
-                                wolf.i, wolf.j = rabbit.i, rabbit.j
-                            wolf.eat()
-                            already_eaten = True
-                            
                             if (random.random() < P_R_W):
-                                new_wolf = Wolf(wolf.x, wolf.y, wolf.i,  wolf.j, R_C)
+                                new_wolf = Wolf(wolf.x, wolf.y, wolf.i, wolf.j, R_C)
+                                
 
-                                added_wolves[N_W]=new_wolf
+                                added_wolves.append(new_wolf)
                                 N_W = N_W + 1
                             # print(f"Rabbit eaten by wolf at {rabbit.x}, {rabbit.y}")
-                            break
+                            
 
-    list_wolves.update(added_wolves)
+    for added_wolf in added_wolves:
+        list_wolves[max(list_wolves.keys()) + 1] = added_wolf
+    added_wolves = []
+
+    for rabbit_id in to_remove:
+        list_rabbits.pop(rabbit_id, None)
+
     # list_num_wolves.append(N_W)
     
     # list_num_rabbits.append(N_R)
@@ -200,3 +205,16 @@ if(name_plot != None):
 
 plt.show()
 
+fig3, ax3 = plt.subplots()
+minimum = min(len(list_num_wolves), len(list_num_rabbits))
+
+ax3.scatter(list_num_wolves[0],list_num_rabbits[0], c='r', label="Starting point")
+ax3.plot(list_num_wolves[:minimum],list_num_rabbits[:minimum], c='r')
+ax3.scatter(list_num_wolves[minimum-1],list_num_rabbits[minimum-1], c='b', label="End point")
+ax3.legend()
+ax3.set_title("Number of wolves vs number of rabbits")
+ax3.set_ylabel("number of rabbits")
+ax3.set_xlabel("Number of wolves")
+ax3.grid(True)
+
+plt.show()
