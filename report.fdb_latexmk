@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1679158266 "/Users/filippocasari/Dropbox/Mac/Documents/ParticleMethods/Assignment2Python/report.tex" "report.pdf" "report" 1679158266
-  "/Users/filippocasari/Dropbox/Mac/Documents/ParticleMethods/Assignment2Python/report.tex" 1679158265 2463 b2cf635248728ef98199a28d6d9999fb ""
+["pdflatex"] 1679228603 "/Users/filippocasari/Dropbox/Mac/Documents/ParticleMethods/Assignment2Python/report.tex" "report.pdf" "report" 1679228604
+  "/Users/filippocasari/Dropbox/Mac/Documents/ParticleMethods/Assignment2Python/report.tex" 1679228603 3853 a73e1b885316ad9d09efff201370ac07 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
@@ -110,9 +110,13 @@
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
   "assignment.sty" 1678188668 3203 e53394e2146597517aced5f2066cea18 ""
   "images/usi_inf.png" 1678188798 84971 bad5bb2e9098283965abf689237a1ee8 ""
-  "report.aux" 1679158266 790 db04af899f34669d6fada912b816eeae "pdflatex"
+  "output3D/3DInitCondition.png" 1679225956 194576 b0b72256f768ec143f9170ecbb145775 ""
+  "output3D/secondPlotPointA.png" 1679226300 141217 8c60386893a835141dbedc746218b1d4 ""
+  "output_main/Initial_condition.png" 1679224044 604806 09f3f366fc740ca07625f0802c9292d1 ""
+  "output_main/PointA.png" 1679224424 29981 efe29363bd65850d327395b3f1c2c69d ""
+  "report.aux" 1679228604 1429 03788399c6a0a515704bf1865e53371e "pdflatex"
   "report.out" 0 -1 0 "pdflatex"
-  "report.tex" 1679158265 2463 b2cf635248728ef98199a28d6d9999fb ""
+  "report.tex" 1679228603 3853 a73e1b885316ad9d09efff201370ac07 ""
   (generated)
   "report.aux"
   "report.log"

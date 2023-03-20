@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.6)  18 MAR 2023 17:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.6)  19 MAR 2023 13:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -514,29 +514,51 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 68.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 68.
+<output_main/Initial_condition.png, id=6, 480.79625pt x 424.58624pt>
+File: output_main/Initial_condition.png Graphic file (type png)
+<use output_main/Initial_condition.png>
+Package pdftex.def Info: output_main/Initial_condition.png  used on input line 78.
+(pdftex.def)             Requested size: 234.73523pt x 207.29755pt.
+[1
+
+{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./images/usi_inf.png> <./output_main/Initial_condition.png>]
+<output_main/PointA.png, id=25, 462.528pt x 346.896pt>
+File: output_main/PointA.png Graphic file (type png)
+<use output_main/PointA.png>
+Package pdftex.def Info: output_main/PointA.png  used on input line 95.
+(pdftex.def)             Requested size: 234.73523pt x 176.05182pt.
+<output3D/3DInitCondition.png, id=26, 867.24pt x 361.35pt>
+File: output3D/3DInitCondition.png Graphic file (type png)
+<use output3D/3DInitCondition.png>
+Package pdftex.def Info: output3D/3DInitCondition.png  used on input line 100.
+(pdftex.def)             Requested size: 281.68513pt x 117.37119pt.
+<output3D/secondPlotPointA.png, id=27, 867.24pt x 361.35pt>
+File: output3D/secondPlotPointA.png Graphic file (type png)
+<use output3D/secondPlotPointA.png>
+Package pdftex.def Info: output3D/secondPlotPointA.png  used on input line 106.
+(pdftex.def)             Requested size: 281.68513pt x 117.37119pt.
+
 
 Package caption Warning: Unused \captionsetup[sub] on input line 57.
 See the caption package documentation for explanation.
 
-[1
-
-{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./images/usi_inf.png>] (./report.aux)
+[2 <./output_main/PointA.png> <./output3D/3DInitCondition.png> <./output3D/secondPlotPointA.png>] (./report.aux)
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 15949 strings out of 478268
- 284336 string characters out of 5846347
- 700577 words of memory out of 5000000
- 33955 multiletter control sequences out of 15000+600000
+ 15991 strings out of 478268
+ 285420 string characters out of 5846347
+ 702577 words of memory out of 5000000
+ 33986 multiletter control sequences out of 15000+600000
  474750 words of font info for 46 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 108i,5n,106p,10717b,321s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 108i,7n,106p,10717b,438s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on report.pdf (1 page, 146130 bytes).
+Output written on report.pdf (2 pages, 925158 bytes).
 PDF statistics:
- 60 PDF objects out of 1000 (max. 8388607)
- 38 compressed objects within 1 object stream
- 5 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 78 PDF objects out of 1000 (max. 8388607)
+ 47 compressed objects within 1 object stream
+ 10 named destinations out of 1000 (max. 500000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

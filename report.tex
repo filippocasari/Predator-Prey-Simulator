@@ -69,11 +69,42 @@ To achieve the goal of the assignment I implemented 3 versions:
   \item \textbf{Python 2D}: In the beginning I used lists of objects and then I switched to dictionaries for better performances. Complexity: $O(n)$ using cell lists. 
   \item \textbf{Python 3D}: Same as the previous version but in a 3D environment. Complexity: $O(n)$
 \end{itemize}
-
+Unfortunately, I found the best parameters that can lead to similar  results for Lotka-Volterra equations. I am going to list those parameters later. 
 \section*{Initial Conditions}
-The rabbits and the wolves are distributed randomly within the environment as shown below. 
+The rabbits and the wolves are distributed randomly within the environment as shown below (example). I decided to not set fixed seed for random functions
+to have every time a different initial condition.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{output_main/Initial_condition.png}
+  \caption{Initial conditions}
+\end{figure}
+
+
 
 
 \section*{Point A}
-In both MATLAB and Python implementations after very few hundred iterations and with the given parameters 
+In both MATLAB and Python implementations after very few hundred iterations and with the given parameters the wolves die. In contrast what I expected, the wolves death rate maybe is high probably because the rabbit birth rate is not high enough.\\
+By running main.py I draw the following plots:
+\begin{itemize}
+  \item \textbf{Simulation}
+  \item \textbf{Number of rabbits and wolves over iterations}
+  \item \textbf{Rabbits and wolves density}
+\end{itemize}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{output_main/PointA.png}
+  \caption{PointA;2D; Number of rabbits and wolves over iterations}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{output3D/3DInitCondition.png}
+  \caption{RT visualization}
+\end{figure}
+In the 3D plot the number of rabbits grows exponentially as well with more than 8000 rabbits only in the very first iterations. 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{output3D/secondPlotPointA.png}
+  \caption{Environment visualization after just 200 iters} 
+\end{figure}
+
 \end{document}

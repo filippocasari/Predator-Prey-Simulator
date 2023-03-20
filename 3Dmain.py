@@ -6,7 +6,6 @@ import random
 import math
 import time
 import json
-from mpl_toolkits.mplot3d import Axes3D
 L = int(input("Insert value for L: "))
 name_plot = input("Insert name for plot according with the assignment point: ")
 PERC_WOLVES = 0.01
@@ -45,6 +44,15 @@ ax2 = fig.add_subplot(122)
 ax.set_xlim([0, L])
 ax.set_ylim([0, L])
 ax.set_zlim([0, L])
+scatter_wolves = ax.scatter([w.x for w in list_wolves], [
+                                w.y for w in list_wolves], [
+                                w.z for w in list_wolves], c='red')
+scatter_rabbits = ax.scatter([r.x for r in list_rabbits], [
+                                 r.y for r in list_rabbits], [r.z for r in list_rabbits], c='green')
+fig.canvas.draw()
+fig.canvas.flush_events()
+plt.pause(4)
+
 start = time.time()
 
 list_num_wolves = []
@@ -226,7 +234,7 @@ ax2.set_title("Number of wolves and rabbits over time")
 ax2.set_xlabel("Iterations")
 ax2.grid(True)
 if (name_plot != None):
-    fig2.savefig("output/"+name_plot+".png")
+    fig2.savefig("output3D/"+name_plot+"_first.png")
 
 plt.show()
 fig3, ax3 = plt.subplots()
@@ -240,6 +248,7 @@ ax3.set_title("Number of wolves vs number of rabbits")
 ax3.set_ylabel("number of rabbits")
 ax3.set_xlabel("Number of wolves")
 ax3.grid(True)
-
+if(name_plot != None):
+    fig3.savefig("output3D/"+name_plot+"second.png")
 plt.show()
 

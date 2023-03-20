@@ -16,7 +16,7 @@ L2 = L**2
 
 list_wolves = {}
 list_rabbits = {}
-with open('params.json', 'r') as f:
+with open('best_params.json', 'r') as f:
     # Load the contents of the file into a dictionary
     params = json.load(f)
 
@@ -68,7 +68,7 @@ for iter in range(1000):
 
     for key, wolf in list(list_wolves.items()):
         if (wolf.not_eaten_iter >= T_D_W):
-            del list_wolves[key]
+            list_wolves.pop(key)
             N_W = N_W - 1
             continue
 
@@ -87,7 +87,8 @@ for iter in range(1000):
     # print(f"past values: {past_value}")
     # print(f"new value {new_value}")
     add_rabbits = {}
-    for key, rabbit in list(list_rabbits.items()):
+    added_rabbits=1
+    for key, rabbit in list_rabbits.copy().items():
         step_len = np.random.normal(mu, sigma, 2)
         direction = np.random.randn(2)
         direction/= np.linalg.norm(direction)
@@ -98,14 +99,15 @@ for iter in range(1000):
         list_rabbits[key].move(dx, dy, L)
 
         if (rabbit.life_steps >= T_D_R):
-            del list_rabbits[key]
+            list_rabbits.pop(key)
             
 
         else:
             if (random.random() < P_R_R):
                 new_rabbit = Rabbit(rabbit.x, rabbit.y,
                                     rabbit.i, rabbit.j, T_D_R, R_C)
-                add_rabbits[max(list_rabbits.keys()) + 1] = new_rabbit
+                add_rabbits[max(list_rabbits.keys()) + added_rabbits] = new_rabbit
+                added_rabbits += 1
                 
 
     list_rabbits.update(add_rabbits)
@@ -114,7 +116,7 @@ for iter in range(1000):
     added_wolves = []
     # list_wolves=np.array(list_wolves)
     to_remove = []
-    for wolf_id, wolf in list(list_wolves.items()):
+    for wolf_id, wolf in list_wolves.items():
         #already_eaten = False
         i = wolf.i
         j = wolf.j
@@ -164,7 +166,7 @@ for iter in range(1000):
     added_wolves = []
 
     for rabbit_id in to_remove:
-        list_rabbits.pop(rabbit_id, None)
+        list_rabbits.pop(rabbit_id)
 
     # list_num_wolves.append(N_W)
     

@@ -4,34 +4,42 @@ from Wolf import Wolf
 from Rabbit import Rabbit
 import random
 import math
-import matplotlib.ticker as ticker
+import json
 import time
 L = int(input("Insert value for L: "))
 name_plot=input("Insert name for plot according with the assignment point: ")
-PERC_WOLVES = 0.01
-PERC_RABBITS = 0.09
-L2 = L**2
-#N_R = int(L2*PERC_RABBITS)
-#N_W = int(L2*PERC_WOLVES)
-N_R = 900#900
-N_W= 200#100
+#PERC_WOLVES = 0.01
+#PERC_RABBITS = 0.09
+#L2 = L**2
+
+
 list_wolves = []
 list_rabbits = []
-R_C = 0.5
+with open('best_params.json', 'r') as f: #best_params.json
+    # Load the contents of the file into a dictionary
+    params = json.load(f)
+
+N_R = params['N_R']
+N_W = params['N_W']
+R_C = params['R_C']
+P_E_W = params['P_E_W']
+P_R_W = params['P_R_W']
+P_R_R = params['P_R_R']
+T_D_R = params['T_D_R']
+T_D_W = params['T_D_W']
+mu = params['mu']
+sigma = params['sigma']
+move_when_eat = params['move_when_eat']
+ITER = params['ITER']
+del params
 print(f"Number of wolves: {N_W}\n")
 print(f"Number of rabbits: {N_R}\n")
-P_E_W = 0.03#0.02#
-P_R_W = 0.1#0.02#
-P_R_R = 0.07#0.02#
-T_D_R = 100#100
-T_D_W = 50
-mu = 0.0#0.0
-sigma = 0.05#0.05
+
 N_X = int(L/R_C)
 N_Y = int(L/R_C)
-fig, ax = plt.subplots()
-scatter_wolves = ax.scatter([], [], c='r')
-scatter_rabbits = ax.scatter([], [], c='b')
+fig = plt.figure(figsize=(12, 5))
+ax = fig.add_subplot(121)
+ax2 = fig.add_subplot(122)
 ax.set_xlim([0, L])
 ax.set_ylim([0, L])
 start = time.time()
@@ -51,8 +59,20 @@ for i in range(N_R):
     y_cell = math.ceil(y / R_C)
     list_rabbits.append(Rabbit(x, y, x_cell, y_cell, T_D_R, R_C))
 
+scatter_wolves = ax.scatter([w.x for w in list_wolves], [
+                                w.y for w in list_wolves], c='red')
+scatter_rabbits = ax.scatter([r.x for r in list_rabbits], [
+                                r.y for r in list_rabbits], c='green')
+ax.grid(True)
+ax.set_title("Initial condition")
+ax.get_figure().savefig(f"output_main/{name_plot}_initial_conition.png")
+ax2.grid(True)
+plt.draw()
+plt.pause(4)
 
-for iter in range(1500):
+
+
+for iter in range(ITER):
 
     if (N_W < 1 or N_R < 1):
         break
@@ -171,9 +191,15 @@ for iter in range(1500):
                                 w.y for w in list_wolves], c='red')
     scatter_rabbits = ax.scatter([r.x for r in list_rabbits], [
                                  r.y for r in list_rabbits], c='green')
-    plt.grid(True)
-    ax.set_xlim([0, L])
-    ax.set_ylim([0, L])
+    
+    ax.set_xlim(0, L)
+    ax.set_ylim(0, L)
+    
+    ax2.set_xlim(0, ITER)
+    #ax2.set_ylim([0, max(len(list_num_rabbits), len(list_num_wolves))])
+    ax2.plot(list_num_wolves, c='red')
+    ax2.plot(list_num_rabbits, c='green')
+    ax.grid()
     # ax.set_yticks(list(range(0,L, int(R_C))))
     # ax.set_xticks(list(range(0,L, int(R_C))))
     # ax.xaxis.set_major_locator(ticker.MultipleLocator(R_C))
