@@ -233,8 +233,10 @@ fig3=plt.figure()
 #scatter = ax.scatter([], [])
 def animate(n):
     line, = plt.plot(list_num_rabbits[:n], list_num_wolves[:n], color='g')
-    plt.xlim([0, max(list_num_rabbits)])
-    plt.ylim([0, max(list_num_wolves)])
+    plt.xlim([-2, max(list_num_rabbits)+2])
+    plt.ylim([-2, max(list_num_wolves)+2])
+    if(n==len(list_num_rabbits)-1 and name_plot!=None):
+        fig3.savefig(f"output_main/{name_plot}_populations.png", dpi=300, bbox_inches='tight', pad_inches=0, format='png')
     return line,
 
 
@@ -242,12 +244,16 @@ plt.scatter(list_num_rabbits[0], list_num_wolves[0], c='r', label="Starting poin
 plt.scatter(list_num_rabbits[-1], list_num_wolves[-1], c='b', label="End point")
 plt.legend()
 plt.title("Number of wolves vs number of rabbits")
-plt.ylabel("number of rabbits")
-plt.xlabel("Number of wolves")
+plt.xlabel("number of rabbits")
+plt.ylabel("Number of wolves")
 plt.grid(True)
 #ax3.plot(,, c='r')
 anim = FuncAnimation(fig, animate, frames=len(list_num_rabbits), interval=25, blit=True)
-
-if (name_plot!=None):
-    fig3.savefig(f"output_main/{name_plot}_populations.png")
 plt.show()
+#if (name_plot!=None):
+ ##   fig = anim._fig
+ #   fig.savefig(f"output_main/{name_plot}_populations.png", dpi=300, bbox_inches='tight', pad_inches=0, format='png', transparent=True)
+    #anim.save(f"output_main/{name_plot}_populations.png", writer='imagemagick', fps=10, frame=len(list_num_rabbits)-1)
+    
+
+

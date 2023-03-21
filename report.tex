@@ -78,7 +78,16 @@ to have every time a different initial condition.
   \includegraphics[width=0.5\textwidth]{output_main/Initial_condition.png}
   \caption{Initial conditions}
 \end{figure}
-
+\section*{Implementations}
+I wrote different json files which are used as input for both main.py and main3D.py scripts. Each of those file contein the specific params descibed in the assignment. \\
+4 json files are in the main folder:
+\begin{itemize}
+  \item paramsA.json
+  \item paramsB.json
+  \item paramsC.json
+  \item best\_params.json
+  
+\end{itemize}
 
 
 
@@ -106,5 +115,90 @@ In the 3D plot the number of rabbits grows exponentially as well with more than 
   \includegraphics[width=0.6\textwidth]{output3D/secondPlotPointA.png}
   \caption{Environment visualization after just 200 iters} 
 \end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{output_main/PointAnew_populations.png}
+  \caption{Population} 
+\end{figure}
 
+\section*{Point B}
+In this point I set the $t_d^r=50$. However, the situations is even worse than point A because the rabbits live less and no food is provided to the wolves. The number of rabbits and wolves converge very quickly to zero as shown below. 
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.435\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{output_main/PointBnew_populations.png}
+    \caption{Population}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{output_main/PointBnew.png}
+    \caption{Population over iterations}
+  \end{minipage}
+\end{figure}
+\section*{Point C}
+In this point I set the $\sigma=0.05$. Even with this different parameter the wolves cannot survive more than just 350 iterations probably because the rabbit birth rate is not sufficient. Moreover, the rabbits numbers oscillate every 100 iterations. 
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.435\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{output_main/PointCnew_populations.png}
+    \caption{Population}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{output_main/PointCnew.png}
+    \caption{Population over iterations}
+  \end{minipage}
+\end{figure}
+
+\section*{My Best parameters}
+After many attempts I found optimal paramters for this model. I list what I used:
+Note: this are the best only for 2D dimensions. I still have to find out which params are the best for the 3D space. File's name are hardcoded in the python implementations. 
+\begin{itemize}
+  \item $ITER$: 1000
+  \item $N\_R$": 900
+  \item $N\_W$: 200, I increase the initial number of wolves
+  \item $R\_C$: 0.5
+  \item $P\_E_W$: 0.03, I increase the probability of eating a rabbit
+  \item $P_R^W$: 0.1, I increase the probability of reproduction rate
+  \item $P_R^R$: 0.07 I increase the probability of reproduction rate
+  \item $T_D^R$: 100 
+  \item $T_D^W$: 50
+  \item $ \mu$: 0.0
+  \item $\sigma$: 0.05, I used $\sigma$ value of point C
+\end{itemize}
+I will show 2 runs of this simulation. One with 1000 and $L=10$ and the other with 2000 iterations and $L=8$. 
+\subsubsection*{First run, L=10, ITER=1000}
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.435\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{output_main/Bestnew_populations.png}
+    \caption{Population}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{output_main/Bestnew.png}
+    \caption{Population over iterations}
+  \end{minipage}
+\end{figure}
+\subsubsection*{First run, L=8, ITER=2000}
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.435\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{output_main/Bestnew2_populations.png}
+    \caption{Population}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{output_main/Bestnew2.png}
+    \caption{Population over iterations}
+  \end{minipage}
+\end{figure}
 \end{document}
