@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.6)  21 MAR 2023 14:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.6)  21 MAR 2023 17:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -514,6 +514,11 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 68.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 68.
+
+Underfull \hbox (badness 10000) in paragraph at lines 71--72
+
+ []
+
 <output_main/Initial_condition.png, id=6, 480.79625pt x 424.58624pt>
 File: output_main/Initial_condition.png Graphic file (type png)
 <use output_main/Initial_condition.png>
@@ -522,91 +527,95 @@ Package pdftex.def Info: output_main/Initial_condition.png  used on input line 7
 [1
 
 {/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./images/usi_inf.png> <./output_main/Initial_condition.png>]
-<output_main/PointA.png, id=25, 462.528pt x 346.896pt>
+<output_main/PointA.png, id=24, 462.528pt x 346.896pt>
 File: output_main/PointA.png Graphic file (type png)
 <use output_main/PointA.png>
 Package pdftex.def Info: output_main/PointA.png  used on input line 104.
 (pdftex.def)             Requested size: 234.73523pt x 176.05182pt.
-<output3D/3DInitCondition.png, id=26, 867.24pt x 361.35pt>
+<output3D/3DInitCondition.png, id=25, 867.24pt x 361.35pt>
 File: output3D/3DInitCondition.png Graphic file (type png)
 <use output3D/3DInitCondition.png>
 Package pdftex.def Info: output3D/3DInitCondition.png  used on input line 109.
 (pdftex.def)             Requested size: 281.68513pt x 117.37119pt.
-<output3D/secondPlotPointA.png, id=27, 867.24pt x 361.35pt>
+<output3D/secondPlotPointA.png, id=26, 867.24pt x 361.35pt>
 File: output3D/secondPlotPointA.png Graphic file (type png)
 <use output3D/secondPlotPointA.png>
 Package pdftex.def Info: output3D/secondPlotPointA.png  used on input line 115.
 (pdftex.def)             Requested size: 281.68513pt x 117.37119pt.
-<output_main/PointAnew_populations.png, id=28, 398.6895pt x 313.4109pt>
+<output_main/PointAnew_populations.png, id=27, 398.6895pt x 313.4109pt>
 File: output_main/PointAnew_populations.png Graphic file (type png)
 <use output_main/PointAnew_populations.png>
 Package pdftex.def Info: output_main/PointAnew_populations.png  used on input line 120.
 (pdftex.def)             Requested size: 281.68513pt x 221.43294pt.
  [2 <./output_main/PointA.png> <./output3D/3DInitCondition.png>]
-<output_main/PointBnew_populations.png, id=39, 398.6895pt x 313.4109pt>
+<output_main/PointBnew_populations.png, id=38, 398.6895pt x 313.4109pt>
 File: output_main/PointBnew_populations.png Graphic file (type png)
 <use output_main/PointBnew_populations.png>
 Package pdftex.def Info: output_main/PointBnew_populations.png  used on input line 130.
 (pdftex.def)             Requested size: 204.21849pt x 160.53564pt.
-<output_main/PointBnew.png, id=40, 462.528pt x 346.896pt>
+<output_main/PointBnew.png, id=39, 462.528pt x 346.896pt>
 File: output_main/PointBnew.png Graphic file (type png)
 <use output_main/PointBnew.png>
 Package pdftex.def Info: output_main/PointBnew.png  used on input line 136.
 (pdftex.def)             Requested size: 230.04309pt x 172.53185pt.
  [3 <./output3D/secondPlotPointA.png> <./output_main/PointAnew_populations.png>]
-<output_main/PointCnew_populations.png, id=51, 398.6895pt x 313.4109pt>
+<output_main/PointCnew_populations.png, id=50, 398.6895pt x 313.4109pt>
 File: output_main/PointCnew_populations.png Graphic file (type png)
 <use output_main/PointCnew_populations.png>
 Package pdftex.def Info: output_main/PointCnew_populations.png  used on input line 146.
 (pdftex.def)             Requested size: 204.21849pt x 160.53564pt.
-<output_main/PointCnew.png, id=52, 462.528pt x 346.896pt>
+<output_main/PointCnew.png, id=51, 462.528pt x 346.896pt>
 File: output_main/PointCnew.png Graphic file (type png)
 <use output_main/PointCnew.png>
 Package pdftex.def Info: output_main/PointCnew.png  used on input line 152.
 (pdftex.def)             Requested size: 230.04309pt x 172.53185pt.
  [4 <./output_main/PointBnew_populations.png> <./output_main/PointBnew.png> <./output_main/PointCnew_populations.png> <./output_main/PointCnew.png>]
-<output_main/Bestnew_populations.png, id=65, 404.9529pt x 313.4109pt>
+<output_main/Bestnew_populations.png, id=64, 404.9529pt x 313.4109pt>
 File: output_main/Bestnew_populations.png Graphic file (type png)
 <use output_main/Bestnew_populations.png>
 Package pdftex.def Info: output_main/Bestnew_populations.png  used on input line 179.
 (pdftex.def)             Requested size: 204.21849pt x 158.05844pt.
-<output_main/Bestnew.png, id=66, 462.528pt x 346.896pt>
+<output_main/Bestnew.png, id=65, 462.528pt x 346.896pt>
 File: output_main/Bestnew.png Graphic file (type png)
 <use output_main/Bestnew.png>
 Package pdftex.def Info: output_main/Bestnew.png  used on input line 185.
 (pdftex.def)             Requested size: 230.04309pt x 172.53185pt.
-<output_main/Bestnew2_populations.png, id=67, 398.6895pt x 313.4109pt>
+<output_main/Bestnew2_populations.png, id=66, 398.6895pt x 313.4109pt>
 File: output_main/Bestnew2_populations.png Graphic file (type png)
 <use output_main/Bestnew2_populations.png>
 Package pdftex.def Info: output_main/Bestnew2_populations.png  used on input line 194.
 (pdftex.def)             Requested size: 204.21849pt x 160.53564pt.
-<output_main/Bestnew2.png, id=68, 462.528pt x 346.896pt>
+<output_main/Bestnew2.png, id=67, 462.528pt x 346.896pt>
 File: output_main/Bestnew2.png Graphic file (type png)
 <use output_main/Bestnew2.png>
 Package pdftex.def Info: output_main/Bestnew2.png  used on input line 200.
 (pdftex.def)             Requested size: 230.04309pt x 172.53185pt.
 
+Underfull \hbox (badness 10000) in paragraph at lines 205--207
+
+ []
+
 
 Package caption Warning: Unused \captionsetup[sub] on input line 57.
 See the caption package documentation for explanation.
 
-[5 <./output_main/Bestnew_populations.png> <./output_main/Bestnew.png> <./output_main/Bestnew2_populations.png> <./output_main/Bestnew2.png>] (./report.aux)
+[5 <./output_main/Bestnew_populations.png> <./output_main/Bestnew.png> <./output_main/Bestnew2_populations.png> <./output_main/Bestnew2.png>] [6] (./report.aux)
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 16079 strings out of 478268
- 288157 string characters out of 5846347
+ 16083 strings out of 478268
+ 288198 string characters out of 5846347
  702577 words of memory out of 5000000
- 34051 multiletter control sequences out of 15000+600000
- 474750 words of font info for 46 fonts, out of 8000000 for 9000
+ 34052 multiletter control sequences out of 15000+600000
+ 475096 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,9n,106p,10717b,504s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on report.pdf (5 pages, 1526763 bytes).
+{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
+Output written on report.pdf (6 pages, 1531651 bytes).
 PDF statistics:
- 126 PDF objects out of 1000 (max. 8388607)
- 72 compressed objects within 1 object stream
- 24 named destinations out of 1000 (max. 500000)
+ 132 PDF objects out of 1000 (max. 8388607)
+ 77 compressed objects within 1 object stream
+ 26 named destinations out of 1000 (max. 500000)
  71 words of extra memory for PDF output out of 10000 (max. 10000000)
 

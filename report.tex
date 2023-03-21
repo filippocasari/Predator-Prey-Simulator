@@ -63,13 +63,13 @@
 \serieheader{Particle Methods}{2023}{Student: Filippo Casari}{}{Report for Assignment 2}{}
 \newline
 \section*{Introduction}
-To achieve the goal of the assignment I implemented 3 versions:
+To achieve the goal of the assignment I implemented 2 versions:
 \begin{itemize}
-  \item \textbf{MATLAB 2D}: Using just lists and the non-optimized version of the algorithm. Complexity: $O(n^2)$
   \item \textbf{Python 2D}: In the beginning I used lists of objects and then I switched to dictionaries for better performances. Complexity: $O(n)$ using cell lists. 
   \item \textbf{Python 3D}: Same as the previous version but in a 3D environment. Complexity: $O(n)$
 \end{itemize}
-Unfortunately, I found the best parameters that can lead to similar  results for Lotka-Volterra equations. I am going to list those parameters later. 
+I found the best parameters that can lead to similar results for Lotka-Volterra equations. I am going to list those parameters later. \\
+
 \section*{Initial Conditions}
 The rabbits and the wolves are distributed randomly within the environment as shown below (example). I decided to not set fixed seed for random functions
 to have every time a different initial condition.
@@ -92,7 +92,7 @@ I wrote different json files which are used as input for both main.py and main3D
 
 
 \section*{Point A}
-In both MATLAB and Python implementations after very few hundred iterations and with the given parameters the wolves die. In contrast what I expected, the wolves death rate maybe is high probably because the rabbit birth rate is not high enough.\\
+ After very few hundred iterations and with the given parameters the wolves die. In contrast what I expected, the wolves death rate maybe is high probably because the rabbit birth rate is not high enough.\\
 By running main.py I draw the following plots:
 \begin{itemize}
   \item \textbf{Simulation}
@@ -201,4 +201,9 @@ I will show 2 runs of this simulation. One with 1000 and $L=10$ and the other wi
     \caption{Population over iterations}
   \end{minipage}
 \end{figure}
+\section*{Conclusion}
+As one can see these simulations perform much more better than previous points. \\
+The plots reflect similarly the beheviour of Lotka–Volterra equations. The parameters used lead to a system equilibria. This is because:\\
+\[ y=\alpha/\beta \textit{ and } x= \gamma/\delta\]
+where $y=\#wolves$, $x=\#rabbits$, and $\alpha$, $\beta$, $\gamma$, $\delta$ are the parameters of the model.
 \end{document}
