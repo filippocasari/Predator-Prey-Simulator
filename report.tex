@@ -79,8 +79,8 @@ to have every time a different initial condition.
   \caption{Initial conditions}
 \end{figure}
 \section*{Implementations}
-I wrote different json files which are used as input for both main.py and main3D.py scripts. Each of those file contein the specific params descibed in the assignment. \\
-4 json files are in the main folder:
+I wrote different json files which are used as input for both main.py and main3D.py scripts. Each of those file conteins the specific params described in the assignment. \\
+4 json files are in the main folder, called:
 \begin{itemize}
   \item paramsA.json
   \item paramsB.json
@@ -109,7 +109,7 @@ By running main.py I draw the following plots:
   \includegraphics[width=0.6\textwidth]{output3D/3DInitCondition.png}
   \caption{RT visualization}
 \end{figure}
-In the 3D plot the number of rabbits grows exponentially as well with more than 8000 rabbits only in the very first iterations. 
+In the 3D plot the number of rabbits grows exponentially as well (8000 rabbits) in the very first iterations. 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.6\textwidth]{output3D/secondPlotPointA.png}
@@ -122,7 +122,7 @@ In the 3D plot the number of rabbits grows exponentially as well with more than 
 \end{figure}
 
 \section*{Point B}
-In this point I set the $t_d^r=50$. However, the situations is even worse than point A because the rabbits live less and no food is provided to the wolves. The number of rabbits and wolves converge very quickly to zero as shown below. 
+In this point I set the $t_d^r=50$. However, the situations is even worse than point A because the rabbits live less and no food is provided to the wolves. The number of rabbits and wolves converges very quickly to zero as shown below. 
 \begin{figure}[H]
   \centering
   \begin{minipage}[b]{0.435\textwidth}
@@ -155,8 +155,8 @@ In this point I set the $\sigma=0.05$. Even with this different parameter the wo
 \end{figure}
 
 \section*{My Best parameters}
-After many attempts I found optimal paramters for this model. I list what I used:
-Note: this are the best only for 2D dimensions. I still have to find out which params are the best for the 3D space. File's name are hardcoded in the python implementations. 
+After many attempts I found optimal paramters for this model. I will list what I used.
+Note: this are the best only for 2D dimensions. I still have to find out which params are the best for the 3D space. 
 \begin{itemize}
   \item $ITER$: 1000
   \item $N\_R$": 900
